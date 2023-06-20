@@ -1,6 +1,8 @@
 #!/usr/bin/node
-function add (a, b) {
-  return a + b;
+// copy the array
+const args = process.argv.slice(2);
+function add (a = args[0], b = args[1]) {
+  console.log(Number(a) + Number(b));
 }
-
-console.log(add(Number(process.argv[2]), Number(process.argv[3])));
+// invoking the function
+add(args[0], args[1]);

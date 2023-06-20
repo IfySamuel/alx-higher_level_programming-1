@@ -1,3 +1,10 @@
 #!/usr/bin/node
-const num = Math.floor(Number(process.argv[2]));
-console.log(isNaN(num) ? 'Not a number' : `My number: ${num}`);
+// copy the array
+const args = process.argv.slice(2);
+// Convert it to integer
+const num = parseInt(args);
+if (Number.isInteger(num)) {
+  console.log('My number: ' + num);
+} else {
+  console.log('Not a number');
+}

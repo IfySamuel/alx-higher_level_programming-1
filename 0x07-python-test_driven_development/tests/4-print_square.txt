@@ -1,57 +1,80 @@
-The ``4-print_square`` module
-============================
+- - - - ALX SOFTWARE ENGINEERING - - - - 
 
-Using ``print_square``
----------------------
+FILENAME: tests/4-print_square.txt
 
-Importing function from the module:
+FOR: 4-print_square.py
 
-    >>> print_square = __import__('4-print_square').print_square
+IMPORTING MODULE: 
+>>> print_square = __import__('4-print_square').print_square
 
-Printing a square with a size of 5
+1. Correct Input
+>>> print_square(4)
+####
+####
+####
+####
 
-    >>> print_square(5)
-    #####
-    #####
-    #####
-    #####
-    #####
+2. Size < 0
+>>> print_square(-1)
+Traceback (most recent call last):
+	...
+ValueError: size must be >= 0
 
-Passing 0 as the size of the square
 
-    >>> print_square(0)
+3. Size is float and < 0
 
-Passing a float number as the size of the square
+>>> print_square(-1.5)
+Traceback (most recent call last):
+	...
+TypeError: size must be an integer
 
-    >>> print_square(1.0)
-    Traceback (most recent call last):
-    	      ...
-    TypeError: size must be an integer
 
-Passing a string as the size of the square
+4. Size is float 
 
-    >>> print_square('2')
-    Traceback (most recent call last):
-    	      ...
-    TypeError: size must be an integer
+>>> print_square(5.5)
+Traceback (most recent call last):
+	...
+TypeError: size must be an integer
 
-Passing a negative number as the size of the square
 
-    >>> print_square(-2)
-    Traceback (most recent call last):
-    	     ...
-    ValueError: size must be >= 0
+5. Size is string
 
-Passing None as the size of the square
+>>> print_square('julius')
+Traceback (most recent call last):
+	...
+TypeError: size must be an integer
 
-    >>> print_square(None)
-    Traceback (most recent call last):
-    	      ...
-    TypeError: size must be an integer
 
-Missing argument
+6. Size is empty
 
-   >>> print_square()
-   Traceback (most recent call last):
-   	     ...
-   TypeError: print_square() missing 1 required positional argument: 'size'
+>>> print_square()
+Traceback (most recent call last):
+	...
+TypeError: print_square() missing 1 required positional argument: 'size'
+
+
+7. Size is None
+
+>>> print_square(None)
+Traceback (most recent call last):
+	...
+TypeError: size must be an integer
+
+
+8. Size is float('inf')
+
+>>> print_square(float('inf'))
+Traceback (most recent call last):
+	...
+TypeError: size must be an integer
+
+
+9. Size is float('nan')
+
+>>> print_square(float('nan'))
+Traceback (most recent call last):
+	...
+TypeError: size must be an integer
+
+
+

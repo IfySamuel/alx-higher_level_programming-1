@@ -1,137 +1,151 @@
-The ``101-lazy_matrix_mul`` module
-============================
+_  _ _ _ ALX SOFTWARE ENGINEERING _ _ _ _ _
 
-Using ``lazy_matrix_mul``
----------------------
+FILENAME: tests/101-lazy_matrix_mul.txt
 
-Importing function from the module:
+TEST FOR: 101-lazy_matrix_mul.py
 
-    >>> matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
+importing the module:
+>>> lazy_matrix_mul = __import__('101-lazy_matrix_mul').lazy_matrix_mul
 
-Multiplying two matrices
+Test for correct output:
 
-    >>> matrix_mul([[1, 2], [3, 4]], [[1, 2], [3, 4]])
-    array([[ 7, 10],
-     	   [15, 22]])
+>>> m_a = [[1, 2], [3, 4]]
+>>> m_b = [[1, 2], [3, 4]]
+>>> lazy_matrix_mul(m_a, m_b)
+array([[ 7, 10],
+       [15, 22]])
 
-Multiplying two matrices 2
+Test for matrix with a string
 
-    >>> matrix_mul([[1, 2]], [[3, 4], [5, 6]])
-    array([[13, 16]])
+>>> m_a = [[1, 2], [3, 'julius']]
+>>> m_b = [[1, 2], [3, 4]]
+>>> lazy_matrix_mul(m_a, m_b)
+Traceback (most recent call last):
+ValueError: data type must provide an itemsize
 
-Multiplying two matrices 3
 
-    >>> list1 = [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
-    >>> list2 = [[1, -1, 2], [2, -1, 2], [3, -3, 0]]
-    >>> matrix_mul(list1, list2)
-    array([[ 30, -26,  10],
-           [ 36, -31,  14],
-           [ 42, -36,  18]])
 
-Multiplying two matrices 4
+Test for both matrices with strings
 
-    >>> matrix_mul([[1, 5, 7]], [[3], [5], [8]])
-    array([[84]])
+>>> m_b = [[1, 2], [3, 'ashley']]
+>>> lazy_matrix_mul(m_a, m_b)
+Traceback (most recent call last):
+ValueError: data type must provide an itemsize
 
-Passing None as a matrix
+>>> m_a = "Holberton"
+>>> m_b = [[1, 2], [3, 8]]
+>>> lazy_matrix_mul(m_a, m_b)
+Traceback (most recent call last):
+TypeError: ufunc 'multiply' did not contain a loop with signature matching types dtype('<U9') dtype('<U9') dtype('<U9')
 
-    >>> matrix_mul(None, None)
-    Traceback (most recent call last):
-    	      ...
-    TypeError: Object arrays are not currently supported
 
-Passing None as a matrix
+>>> m_a = [[1, 2], [3, 8]]
+>>> m_b = "Holberton"
+>>> lazy_matrix_mul(m_a, m_b)
+Traceback (most recent call last):
+TypeError: ufunc 'multiply' did not contain a loop with signature matching types dtype('<U9') dtype('<U9') dtype('<U9')
 
-    >>> matrix_mul([[7, 12]], None)
-    Traceback (most recent call last):
-    	      ...
-    TypeError: Object arrays are not currently supported
 
-Passing a tuple as a matrix
+>>> m_a = [[1, "2"], [3, 8]]
+>>> m_b = [[1, 2], [3, 8]]
+>>> lazy_matrix_mul(m_a, m_b)
+Traceback (most recent call last):
+ValueError: data type must provide an itemsize
 
-    >>> matrix_mul((1, 3, 5), [[1.3], [5.2], [7.7]])
-    array([55.4])
 
-Passing a string as a matrix
+>>> m_b = [[1, "2"], [3, 8]]
+>>> m_a = [[1, 2], [3, 8]]
+>>> lazy_matrix_mul(m_a, m_b)
+Traceback (most recent call last):
+ValueError: data type must provide an itemsize
 
-    >>> matrix_mul([[3, 3], [4, 4]], "Holberton")
-    Traceback (most recent call last):
-    	      ...
-    ValueError: Scalar operands are not allowed, use '*' instead
 
-Passing a list of tuples
 
-   >>> matrix_mul([(1, 5, 10)], [(1), (5)])
-   Traceback (most recent call last):
-   	     ...
-   ValueError: shapes (1,3) and (2,) not aligned: 3 (dim 1) != 2 (dim 0)
+Test for a matrix with tuples
 
-Passing a list of string
+>>> m_a = [[1, 2], (5, 8)]
+>>> m_b = [[1, 2], [3, 8]]
+>>> lazy_matrix_mul(m_a, m_b)
+array([[ 7, 18],
+       [29, 74]])
 
-   >>> matrix_mul([[]], ["Holberton"])
-   Traceback (most recent call last):
-   	     ...
-   ValueError: shapes (1,0) and (1,) not aligned: 0 (dim 1) != 1 (dim 0)
 
-Passing an empty matrix
+Test for a matrix of negative values
 
-    >>> matrix_mul([], [[1]])
-    Traceback (most recent call last):
-    	      ...
-    ValueError: shapes (0,) and (1,1) not aligned: 0 (dim 0) != 1 (dim 0)
+>>> m_b = [[1, -2], (5, -8)]
+>>> m_a = [[1, 2], [3, -2]]
+>>> m_b = [[1, -2], [5, -8]]
+>>> lazy_matrix_mul(m_a, m_b)
+array([[ 11, -18],
+       [ -7,  10]])
 
-Passing an empty matrix 2
 
-    >>> matrix_mul([[1, 2]], [[]])
-    Traceback (most recent call last):
-    	      ...
-    ValueError: shapes (1,2) and (1,0) not aligned: 2 (dim 1) != 1 (dim 0)
+Test for a matrix of float inf
 
-Passing a matrix with a list of strings
+>>> m_a = [[1, 2], [3, float('inf')]]
+>>> m_b = [[1, 2], [5, 8]]
+>>> lazy_matrix_mul(m_a, m_b)
+array([[11., 18.],
+       [inf, inf]])
 
-    >>> matrix_mul([[1, '1', 1], ['2', 2, '2']], [[3], [3]])
-    Traceback (most recent call last):
-    	      ...
-    ValueError: shapes (2,3) and (2,1) not aligned: 3 (dim 1) != 2 (dim 0)
 
-Passing a matrix with a list of strings 2
+Test for a matrix of nan
 
-    >>> matrix_mul([[2, 4, 6], [3, 6, 9]], [[1], ['2'], [3]])
-    Traceback (most recent call last):
-    	      ...
-    TypeError: invalid data type for einsum
+>>> m_a = [[1, 2], [3, float('nan')]]
+>>> m_b = [[1, 2], [5, 8]]
+>>> lazy_matrix_mul(m_a, m_b)
+array([[11., 18.],
+       [nan, nan]])
 
-Passing a matrix with an empty list
 
-    >>> matrix_mul([[12, 12, 12], [], [14, 14, 14]], [[2], [3], [8]])
-    Traceback (most recent call last):
-    	      ...
-    ValueError: setting an array element with a sequence.
+Test for a matrix of both float inf and nan
 
-Passing a matrix which its rows have different size
+>>> m_a = [[1, 2], [float('inf'), float('nan')]]
+>>> m_b = [[1, 2], [5, 8]]
+>>> lazy_matrix_mul(m_a, m_b)
+array([[11., 18.],
+       [nan, nan]])
 
-    >>> matrix_mul([[2, 2, 2], [4, 4, 4]], [[2], [3, 3]])
-    Traceback (most recent call last):
-    	      ...
-    ValueError: setting an array element with a sequence.
 
-Passing two matrix that can't be multiplied
+Test for a matrix with no elements
 
-    >>> matrix_mul([[5, 2, 3], [7, 13, 2], [1, 0, 3]], [[2, 3], [6, 9]])
-    Traceback (most recent call last):
-    	      ...
-    ValueError: shapes (3,3) and (2,2) not aligned: 3 (dim 1) != 2 (dim 0)
+>>> m_a = []
+>>> m_b = [[]]
+>>> lazy_matrix_mul(m_a, m_b)
+Traceback (most recent call last):
+ValueError: shapes (0,) and (1,0) not aligned: 0 (dim 0) != 1 (dim 0)
 
-Missing one argument
 
-    >>> matrix_mul([[1, 2]])
-    Traceback (most recent call last):
-    	            ...
-    TypeError: lazy_matrix_mul() missing 1 required positional argument: 'm_b'
+Test for empty matrices
 
-Missing arguments
+>>> m_b = [[], []]
+>>> m_a = [[], []]
+>>> lazy_matrix_mul(m_a, m_b)
+Traceback (most recent call last):
+ValueError: shapes (2,0) and (2,0) not aligned: 0 (dim 1) != 2 (dim 0)
 
-    >>> matrix_mul()
-    Traceback (most recent call last):
-    	            ...
-    TypeError: lazy_matrix_mul() missing 2 required positional arguments: 'm_a' and 'm_b'
+
+>>> m_b = [[], []]
+>>> m_a = [[]]
+>>> lazy_matrix_mul(m_a, m_b)
+Traceback (most recent call last):
+ValueError: shapes (1,0) and (2,0) not aligned: 0 (dim 1) != 2 (dim 0)
+
+
+Test for matrices of different length
+
+>>> m_a = [[1, 2], [3, 9, 8, 9], [9, 8, 8]]
+>>> m_b = [[1, 2], [33, 8]]
+>>> lazy_matrix_mul(m_a, m_b)
+Traceback (most recent call last):
+ValueError: setting an array element with a sequence.
+
+
+Test for matrix of None
+
+>>> m_a = [[1, 2], [3, 9], [9, None]]
+>>> m_b = [[1, 2], [33, 8]]
+>>> lazy_matrix_mul(m_a, m_b)
+Traceback (most recent call last):
+TypeError: unsupported operand type(s) for *: 'NoneType' and 'int'
+

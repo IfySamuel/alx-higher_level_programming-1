@@ -1,54 +1,81 @@
-The ``3-say_my_name`` module
-============================
+- -- --- ---- ----- ALX SOFTWARE ENGINEERING ----- -----
 
-Using ``say_my_name``
----------------------
 
-Importing function from the module:
+FILENAME: tests/3-say_my_name.txt
 
-    >>> say_my_name = __import__('3-say_my_name').say_my_name
+FOR : 3-say_my_name.py
 
-Passing first_name and last_name correctly
+importing the module: 
+>>> say_my_name = __import__('3-say_my_name').say_my_name
 
-    >>> say_my_name("Betty", "Holberton")
-    My name is Betty Holberton
+1: Test for correct output if string passed
 
-Passing first_name and last_name correctly 2
+>>> say_my_name("John", "Smith")
+My name is John Smith
 
-    >>> say_my_name("Luis")
-    My name is Luis 
+>>> say_my_name("Bob")
+My name is Bob 
 
-Passing None as the last_name
+2: Test for None 
 
-    >>> say_my_name("John", None)
-    Traceback (most recent call last):
-    	      ...
-    TypeError: last_name must be a string
+>>> say_my_name(None)
+Traceback (most recent call last):
+	...
+TypeError: first_name must be a string
 
-Passing None as the first_name
+>>> say_my_name(None, None)
+Traceback (most recent call last):
+	...
+TypeError: first_name must be a string
 
-    >>> say_my_name(None)
-    Traceback (most recent call last):
-    	      ...
-    TypeError: first_name must be a string
 
-Passing a number as the first_name
+3: Test for Integer values
 
-    >>> say_my_name(1)
-    Traceback (most recent call last):
-    	      ...
-    TypeError: first_name must be a string
+>>> say_my_name(12, "White")
+Traceback (most recent call last):
+	...
+TypeError: first_name must be a string
 
-Passing a number as the last_name
+>>> say_my_name("White", 12)
+Traceback (most recent call last):
+	...
+TypeError: last_name must be a string
 
-    >>> say_my_name("Betty", 0)
-    Traceback (most recent call last):
-    	      ...
-    TypeError: last_name must be a string
+>>> say_my_name()
+Traceback (most recent call last):
+	...
+TypeError: say_my_name() missing 1 required positional argument: 'first_name'
 
-Missing two arguments
 
-    >>> say_my_name()
-    Traceback (most recent call last):
-    	      ...
-    TypeError: say_my_name() missing 1 required positional argument: 'first_name'
+>>> say_my_name(12, 12)
+Traceback (most recent call last):
+	...
+TypeError: first_name must be a string
+
+
+4: Test for float(inf) / float(nan)
+
+>>> say_my_name(float('nan'))
+Traceback (most recent call last):
+	...
+TypeError: first_name must be a string
+
+
+>>> say_my_name(float('nan'), float('nan'))
+Traceback (most recent call last):
+	...
+TypeError: first_name must be a string
+
+
+>>> say_my_name(float('inf'))
+Traceback (most recent call last):
+	...
+TypeError: first_name must be a string
+
+
+>>> say_my_name(float('inf'), float('inf'))
+Traceback (most recent call last):
+	...
+TypeError: first_name must be a string
+
+

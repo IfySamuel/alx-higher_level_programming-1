@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-""" This module prints size * #, if size abides by all
+""" This module prints size * #, if size abides by all 
 conditions.
 FILENAME: 4-print_square.py
 """
 
 
 def print_square(size):
-    """ This function prints out a square with the
+    """ This function prints out a square with the 
     character #
     """
     # - - - checking if size is not int
